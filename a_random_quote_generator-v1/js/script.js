@@ -124,12 +124,18 @@ function printQuote() {
     htmlString+= randomQuotesArrayObject.source + '<span class="citation">' 
     if (randomQuotesArrayObject.citation) { 
       htmlString+= randomQuotesArrayObject.citation + '</span><span class="year">'; 
-    } 
+    } else {
+
+    }
     if (randomQuotesArrayObject.year) { 
     htmlString+= randomQuotesArrayObject.year + '</span>' ;
+    } else {
+      
     }
     if (randomQuotesArrayObject.tag) { 
       htmlString+= randomQuotesArrayObject.tag + '</span>' ;
+      } else {
+      
       }
     '</p>';
   document.getElementById('quote-box').innerHTML = htmlString;
