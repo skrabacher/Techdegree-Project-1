@@ -108,6 +108,25 @@ function getRandomQuote() {
   return (quotes[randomNumber]); 
 };
 
+//Function below generates a random background color each time a quote is generated on the page. 
+//I used the instructional link below to help guide me in creating this function
+//For my own clarity, I changed many of the variable names to be more specific.
+//In order to ensure that the backgroung colors were dark enough to contrast with the white quote text, I lowered the colorInteger range to 156.
+//https://www.w3resource.com/javascript-exercises/javascript-math-exercise-40.php
+//*** function DOES NOT change the button color to match the background color.
+//*** If I have time, I would really like to get the button color matching.
+function getRandomBackgroundColor() {
+  var colorInteger1 = Math.floor(Math.random() * 156);
+  var colorInteger2 = Math.floor(Math.random() * 156);
+  var colorInteger3 = Math.floor(Math.random() * 156);
+  var backgroundColor = "rgb(" + colorInteger1 + "," + colorInteger2 + "," + colorInteger3 + ")";
+console.log(backgroundColor);
+
+  document.body.style.background = backgroundColor;
+}
+
+//Called getRandomBackgroundColor function here so that the program randomly generates a color on it's first run, as opposed to the default green color on line 89 of the syles.css file.
+getRandomBackgroundColor();
 
 // Function below calls the getRandomQuote function so that I have one random object from my array. 
 // It then formats each of the properties in the selected object.
@@ -115,6 +134,7 @@ function getRandomQuote() {
 // I used If Else statements to make the formatting conditional upon whether or not a property was present in the selected object.
 
 function printQuote() {
+  getRandomBackgroundColor();
   var randomQuotesArrayObject = getRandomQuote();
   var htmlString = '<p class="quote">' + randomQuotesArrayObject.quote + '</p>'
     htmlString+= '<p class="source">' + randomQuotesArrayObject.source
@@ -137,14 +157,24 @@ function printQuote() {
   document.getElementById('quote-box').innerHTML = htmlString;
 };
 
+//Called printQuote function here so that the program randomly generates a quote as it is first run, as opposed to the default Patrick McKenzie quote written into the HTML file.
+printQuote();
 
 
-/***
-  When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
-***/
+
+//*DRAFT*Function below automatically refreshes the page, thus generating a new quote and background color every 20 seconds.
+//I referenced the MDN link below for guidance on how to write the fucntion 
+//https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval
+//NOTES 20000 milleseconds = 20 seconds, function uses milleseconds.
+
+// function refresh() {
+//   window.location.reload();
+
+
+// window.setInterval('refreshPage()', 2000); 
+// }
+
+
 //this line of code allows the event listener to trigger when the "Show another quote" button is clicked.
 //the event listener then runs the printQuote function that I wrote above.
 //I did not write the line of code below. It was provided by TeamTreehouse as part of the file template for this project.
@@ -154,11 +184,11 @@ document.getElementById('loadQuote').addEventListener("click", printQuote, false
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
 
-
+//EXCEEDS EXPECTATIONS CRITERIA LISTED BELOW
 // *DONE* Add more properties to the quote object
   // For example, a tags property could include a list of "tags" like "humor", "business", or "politics" to categorize each quote.
   // Use the new properties to conditionally add to the HTML string that gets printed to the screen.
-// Random background color *styles.css line 89 is where the bakcground color is stipulated. Line 94 is where the botton hover color change is located.
+// *DONE* Random background color *styles.css line 89 is where the bakcground color is stipulated. Line 94 is where the botton hover color change is located.
   // When the quote changes, randomly change the background color of the page.
 // Auto-refresh the quote
   // After a set amount of time, like 20 to 30 seconds, print a new quote to the page. A timing method like setInterval() is helpful here. Avoid using the setTimeout function for this step. See the links in the “Additional Resources” section.
